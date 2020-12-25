@@ -1,0 +1,6 @@
+numpy==1.18.5
+matplotlib==3.2.2
+pandas==1.0.4
+Django==3.0.7
+pandas_profiling==2.8.0
+scikit_learn==0.24.0

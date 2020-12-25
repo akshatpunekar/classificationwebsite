@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Classification results :</h2>
+
+<i><b>Detailed Analysis of dataset: <a href="/detail" target="_blank">Link</a></b></i>
+<br>
+<br>
+
+<i><b>The confusion matrix for the classification is :</b></i>
+    <table>
+    {% for row in table %}
+        <tr>
+        {% for cell in row %}
+            {% if forloop.first or forloop.parentloop.first %} <th> {% else %} <td> {% endif %}
+                {{ cell }}
+            {% if forloop.first or forloop.parentloop.first %} </th> {% else %} </td> {% endif %}
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+
+<b>The classification metrics :</b> <br>
+<i>The <b>accuracy</b> of classification using <b>{{model_name}}</b> classifier is : {{acc}}%</i>
+<br>
+
+<i>The <b>Kappa Coefficient</b> for the classifier is : {{kappa}}</i>
+<br>
+
+<i>The <b>Matthew Correlation Coefficient</b> for the classifier is : {{matthew}}</i>
+<br>
+
+<i>The <b>precision</b> for the classifier is : {{precision}}</i>
+<br>
+
+<i>The <b>recall</b> for the classifier is : {{recall}}</i>
+<br>
+
+<i>The <b>True Positive Rate (TPR)</b> for the classifier is : {{tpr}}</i>
+<br>
+
+<i>The <b>False Positive Rate (FPR)</b> for the classifier is : {{fpr}}</i>
+<br>
+<br>
+
+
+
+    {% if required %}
+
+    <table>
+    {% for row in finaltable %}
+        <tr>
+        {% for cell in row %}
+            {% if forloop.first or forloop.parentloop.first %} <th> {% else %} <td> {% endif %}
+                {{ cell }}
+            {% if forloop.first or forloop.parentloop.first %} </th> {% else %} </td> {% endif %}
+        {% endfor %}
+        </tr>
+    {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

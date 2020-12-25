@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<span class="login100-form-title p-t-20 p-b-45">
+						Register
+					</span>
+    <form action="register" method="post">
+        {% csrf_token %}
+
+        <input type="text" name="first_name" placeholder="First Name"><br>
+        <input type="text" name="last_name" placeholder="Last Name"><br>
+        <input type="text" name="username" placeholder="User Name"><br>
+        <input type="email" name="email" placeholder="Email ID"><br>
+        <input type="password" name="password1" placeholder="Create Password"><br>
+        <input type="password" name="password2" placeholder="Confirm Password"><br>
+        <input type="submit">
+
+    </form>
+    <div>
+        {% for message in messages %}
+        <h3>  {{message}}  </h3>
+        {% endfor %}
+    </div>
+{% endblock %}

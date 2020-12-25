@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="check?filepath={{ query|urlencode }}" method="post">
+  {% csrf_token %}
+  <label for="classification">Choose a method for classification:</label>
+  <select id="classification" name="classification">
+    <option value="naive_bayes">Naive Bayes</option>
+    <option value="log_reg">Logistic Regression</option>
+    <option value="dec_trs">Decision Trees</option>
+    <option value="svm">Support Vector Machines</option>
+    <option value="knn">K-Nearest Neighbours</option>
+    <option value="lda">Linear Discriminant Analysis</option>
+    <option value="bdt">Bagging Decision Trees</option>
+
+  </select>
+  <br>
+
+  <br>
+  <label for="split">Test size (between 0 and 1):</label>
+  <input type="number" id="split" name="split" min="0.0" max="1.0" step="0.01" value="0.1">
+   <br>
+
+  <br>
+  <p>Do you want to display actual/predicted values?
+  <input type="radio" id="yes" name="option" value="1">
+  <label for="yes">Yes</label>
+  <input type="radio" id="no" name="option" value="0" checked>
+  <label for="no">No</label><br>
+  </p>
+
+
+  <label for="target_variable">Choose a target variable :</label>
+  <select id="target_variable" name="target_variable">
+    {% for parameter in parameters %}
+    {% if parameter == final_variable %}
+    <option value="{{parameter}}" selected>{{parameter}}</option>
+    {% else %}
+    <option value="{{parameter}}">{{parameter}}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+
+  <br>
+  <br>
+
+  <p>Select the required features for classification: </p>
+  {% for parameter in parameters %}
+  {% if parameter == final_variable %}
+  <input type="checkbox" id="feature" name="{{ parameter }}" value="{{ parameter }}">
+  <label for="feature"> {{ parameter }} </label><br>
+  {% else %}
+  <input type="checkbox" id="feature" name="{{ parameter }}" value="{{ parameter }}" checked>
+  <label for="feature"> {{ parameter }} </label><br>
+  {% endif %}
+  {% endfor %}
+
+  <br>
+  <!-- form ends here -->
+  <input type="submit">
+</form>
+{% endblock %}
